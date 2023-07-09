@@ -83,9 +83,19 @@ the latest `day` folder via tspaths.  This allows us to avoid updating anything
 for testing each day.
 
 #### Testing
+
+To test all the algorithms
+
 ```
 yarn test
 ```
+
+OR to test a single file
+
+```
+npx jest TestName
+```
+> Example: npx jest Linear
 
 I have yet to create a testing strategy for next sets of algorithms, but we
 will get there when i cross that bridge.
