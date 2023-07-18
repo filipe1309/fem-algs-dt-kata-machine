@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "search",
-    "sort"
+    "sort",
+    "arrays"
   ]
 }
