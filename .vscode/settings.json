@@ -2,6 +2,7 @@
   "conventionalCommits.scopes": [
     "search",
     "sort",
-    "arrays"
+    "arrays",
+    "recursion"
   ]
 }
