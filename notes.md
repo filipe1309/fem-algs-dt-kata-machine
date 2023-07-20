@@ -26,3 +26,9 @@ let a = []
 ```
 It is a Array List or a Dynamic Array in Javascript
 
+
+## QuickSort
+
+```sh
+npx jest Quick
+```
