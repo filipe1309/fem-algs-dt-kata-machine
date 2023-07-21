@@ -40,25 +40,26 @@ export default class DoublyLinkedList<T> {
         }
 
         newNode.next = this.head;
+        this.head.prev = newNode;
         this.head = newNode;
     }
 
     insertAt(item: T, idx: number): void {
         if (this.length = 0) return;
+        if (idx > this.length) throw new Error("Bad idx, list size limit exceeded");
+        if (idx == this.length) { this.append(item); return; }
+        if (idx == 0) { this.prepend(item); return; }
+
         this.length++;
-
         let newNode = { value: item } as Node<T>;
-        let curr = this.head;
-
-        for (let i = 0; curr && i < idx; i++) {
-            curr = curr?.next;
-        }
+        
+        let curr = this.getAt(idx);
 
         newNode.next = curr
         newNode.prev = curr?.prev
 
-        if (curr && curr.prev?.next) curr.prev.next = newNode
-        if (curr && curr.prev) curr.prev = newNode
+        if (curr?.prev) curr.prev = newNode
+        if (newNode?.prev?.next) newNode.prev.next = newNode
     }
 
     append(item: T): void {
@@ -76,50 +77,49 @@ export default class DoublyLinkedList<T> {
 
     remove(item: T): T | undefined {
         let curr = this.head;
-
         for (let i = 0; curr && i < this.length; i++) {
             if (curr.value == item) break;
             curr = curr?.next;
         }
 
-        if (curr == undefined || (curr.value != item)) return;
-        
-        this.length = Math.max(0, this.length - 1);
+        if (!curr) return undefined;
 
-        if (curr.prev?.next) curr.prev.next = curr?.next
-        if (curr.next?.prev) curr.next.prev = curr?.prev
-
-        if (curr.value === this.head?.value) this.head = curr.next
-        if (curr.value === this.tail?.value) this.tail = curr.prev
-        
-        return curr?.value
+        return this.removeNode(curr)
     }
 
     get(idx: number): T | undefined {
+        let node = this.getAt(idx);
+        return node?.value
+    }
+
+    private getAt(idx:number): Node<T> | undefined {
         let curr = this.head;
         for (let i = 0; curr?.next && i < idx; i++) {
             curr = curr?.next;
         }
 
-        return curr?.value
+        return curr;
     }
 
     removeAt(idx: number): T | undefined {
-        let curr = this.head;
-        for (let i = 0; curr && i < idx; i++) {
-            curr = curr?.next;
-        }
+        let node = this.getAt(idx);
+        if (!node) return undefined;
 
-        if (curr == undefined) return;
+        return this.removeNode(node)
+    }
 
+    private removeNode(node: Node<T>): T | undefined {
         this.length = Math.max(0, this.length - 1);
+        if (this.length == 0) this.head = this.tail = undefined;
+        
+        if (node.prev?.next) node.prev.next = node?.next
+        if (node.next?.prev) node.next.prev = node?.prev
 
-        if (curr.prev?.next) curr.prev.next = curr?.next
-        if (curr.next?.prev) curr.next.prev = curr?.prev
+        if (node === this.head) this.head = node.next;
+        if (node === this.tail) this.tail = node.prev;
 
-        if (curr.value === this.head?.value) this.head = curr.next
-        if (curr.value === this.tail?.value) this.tail = curr.prev
+        node.prev = node.next = undefined
 
-        return curr?.value
+        return node?.value
     }
 }
