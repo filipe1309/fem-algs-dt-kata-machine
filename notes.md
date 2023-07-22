@@ -32,3 +32,17 @@ It is a Array List or a Dynamic Array in Javascript
 ```sh
 npx jest Quick
 ```
+
+## Trees
+
+```sh
+npx jest BTPreOrder
+```
+
+```sh
+npx jest BTInOrder
+```
+
+```sh
+npx jest BTPostOrder
+```
