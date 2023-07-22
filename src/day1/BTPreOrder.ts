@@ -1,9 +1,3 @@
-export default function pre_order_search(head: BinaryNode<number>): number[] {
-  const path: number[] = []
-  traverse(head, path)
-  return path;
-}
-
 function traverse(head: BinaryNode<number> | null, numbers: number[]): void {
   if (!head) return;
 
@@ -17,4 +11,10 @@ function traverse(head: BinaryNode<number> | null, numbers: number[]): void {
   traverse(head.right, numbers);
 
   // post
+}
+
+export default function pre_order_search(head: BinaryNode<number>): number[] {
+  const path: number[] = []
+  traverse(head, path)
+  return path;
 }
