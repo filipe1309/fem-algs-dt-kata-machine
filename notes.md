@@ -46,3 +46,9 @@ npx jest BTInOrder
 ```sh
 npx jest BTPostOrder
 ```
+
+### All 3
+
+```sh
+npx jest Order
+```
