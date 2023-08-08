@@ -1,5 +1,5 @@
 export default function dfs(head: BinaryNode<number>, needle: number): boolean {
-  return mySolution2(head, needle);
+  return solution(head, needle);
 }
 
 function mySolution(head: BinaryNode<number>, needle: number): boolean {
@@ -17,4 +17,12 @@ function mySolution2(curr: BinaryNode<number> | null, needle: number): boolean {
   if (curr.value === needle) return true;
 
   return mySolution2(curr.left, needle) || mySolution2(curr.right, needle);
+}
+
+function solution(curr: BinaryNode<number> | null, needle: number): boolean {
+  if (!curr) return false;
+  if (curr.value === needle) return true;
+
+  if (curr.value < needle) return solution(curr.right, needle);
+  return  solution(curr.left, needle);
 }
