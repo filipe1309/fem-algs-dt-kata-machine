@@ -17,14 +17,14 @@ export default class MinHeap {
 
     mySolutionInsert(value: number) {
         this.data.push(value);
+        this.mySolutionInsertHeapifyUp(this.length)
         this.length++;
-        this.mySolutionInsertHeapifyUp()
     }
 
-    mySolutionInsertHeapifyUp(): void {
-        let parentIdx = this.parent(this.length - 1);
+    mySolutionInsertHeapifyUp(idx: number): void {
+        let parentIdx = this.parent(idx);
         let parent = this.data[parentIdx];
-        let nodeIdx = this.length-1;
+        let nodeIdx = idx;
         let node = this.data[nodeIdx];
         while (node < parent) {
             this.data[nodeIdx] = parent;
@@ -46,7 +46,7 @@ export default class MinHeap {
         return del|| 0;
     }
 
-    mySolutionDeleteHeapifyDown(idx: number) {
+    mySolutionDeleteHeapifyDown(idx: number): void {
         const node = this.data[idx];
         if (node === null) return;
 
@@ -62,26 +62,8 @@ export default class MinHeap {
         }
     }
 
-    solutionInsert(value: number) {
-        this.data.push(value);
-        this.length++;
-        this.heapifyUp(this.length-1)
-    }
-
-    heapifyUp(idx: number): void {
-        
-    }
-
     private parent(idx: number): number {
         return Math.floor((idx - 1) / 2);
-    }
-
-    solutionDelete() {
-
-    }
-
-    heapifyDown() {
-
     }
     
     private leftChild(idx: number): number {
