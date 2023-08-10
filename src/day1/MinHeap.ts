@@ -12,7 +12,7 @@ export default class MinHeap {
         return this.data
     }
     delete(): number {
-        return this.mySolutionDelete();
+        return this.solutionDelete();
     }
 
     mySolutionInsert(value: number) {
@@ -43,7 +43,7 @@ export default class MinHeap {
         if (last) this.data.unshift(last);
         this.length--;
         this.mySolutionDeleteHeapifyDown(0);
-        return del|| 0;
+        return del|| -1;
     }
 
     mySolutionDeleteHeapifyDown(idx: number): void {
@@ -80,6 +80,39 @@ export default class MinHeap {
             this.data[idx] = parent;
 
             this.heapifyUp(parentIdx);
+        }
+    }
+
+
+    solutionDelete(): number {
+        if (this.length === 0) return -1;
+        const out = this.data[0];
+        this.length--;
+        if (this.length === 0) { this.data = []; return out; }
+
+        this.data[0] = this.data[this.length];
+        this.heapifyDown(0);
+        return out;
+    }
+
+    heapifyDown(idx: number): void {
+        const lIdx = this.leftChild(idx);
+        const rIdx = this.rightChild(idx);
+
+        if (idx >= this.length || lIdx >= this.length) return;
+
+        const lV = this.data[lIdx];
+        const rV = this.data[rIdx];
+        const nV = this.data[idx];
+
+        if (lV > rV && nV > rV) {
+            this.data[rIdx] = nV;
+            this.data[idx] = rV;
+            this.heapifyDown(rIdx);
+        } else if (rV > lV && nV > lV) {
+            this.data[lIdx] = nV;
+            this.data[idx] = lV;
+            this.heapifyDown(lIdx);
         }
     }
 
