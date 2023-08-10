@@ -8,7 +8,7 @@ export default class MinHeap {
     }
 
     insert(value: number): number[] {
-        this.mySolutionInsert(value)
+        this.solutionInsert(value)
         return this.data
     }
     delete(): number {
@@ -59,6 +59,27 @@ export default class MinHeap {
             this.data[idxMinChild] = node;
             this.data[idx] = minChild;
             this.mySolutionDeleteHeapifyDown(idxMinChild);
+        }
+    }
+
+    solutionInsert(value: number) {
+        this.data.push(value);
+        this.heapifyUp(this.length)
+        this.length++;
+    }
+
+    heapifyUp(idx: number): void {
+        if (idx === 0) return;
+
+        const parentIdx = this.parent(idx);
+        const parent = this.data[parentIdx];
+        const node = this.data[idx];
+
+        if (parent > node) {
+            this.data[parentIdx] = node;
+            this.data[idx] = parent;
+
+            this.heapifyUp(parentIdx);
         }
     }
 
