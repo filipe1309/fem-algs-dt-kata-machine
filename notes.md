@@ -60,3 +60,15 @@ npx jest Order
 Opposite of a stack is a queue!!!
 
 
+### Heap
+
+```js
+const zero = "a".charCodeAt(0)
+
+function idx(c) {
+  return c.charCodeAt(0) - zero
+}
+
+// idx(c) = c.charCodeAt(0) - zero = 99 - 97 = 2
+// idx(f) = f.charCodeAt(0) - zero = 102 - 97 = 5
+```
